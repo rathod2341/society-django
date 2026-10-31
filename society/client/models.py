@@ -3,9 +3,9 @@ from django.db import models
 class housingmember(models.Model):
     member_id = models.AutoField(primary_key=True)
     member_name = models.CharField(max_length=30)
-    contact = models.CharField(max_length=10)
+    contact = models.CharField(max_length=15)
     email = models.CharField(max_length=50)
-    password = models.CharField(max_length=10)
+    password = models.CharField(max_length=128)
     otp = models.IntegerField()
     otp_used = models.IntegerField()
     is_rented = models.BooleanField(default=False)
