@@ -1,0 +1,75 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+	  <div class="container-full">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="d-flex align-items-center">
+				<div class="me-auto">
+					<h3 class="page-title">Workers</h3>
+					<div class="d-inline-block align-items-center">
+						
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<!-- Main content -->
+		<section class="content">
+
+		  <div class="row">
+			  <div class="col-12">
+				<div class="box">
+				  <div class="box-body">
+					<div class="table-responsive">
+						<table id="productorder" class="table table-hover no-wrap product-order" data-page-size="10">
+							<thead>
+								<tr>
+									 <th>WORKER_NAME</th>
+									 <th>CONTACT_NO</th>
+									 <th>IN_TIME</th>
+									 <th>OUT_TIME</th>
+									 <th>TYPE_ID</th>
+									 <th>BASIC_CHARGES</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								
+								
+								
+							{% for data in hw %}	
+								
+								<tr>
+									<td>{{data.worker_name}}</td>
+									<td>{{data.contact_no}}</td>
+									<td>{{data.in_time}}</td>
+									<td>{{data.out_time}}</td>
+									<td>{{data.type_id}}</td>
+									<td>{{data.basic_charges}}</td>
+									</td>
+									
+								</tr>
+								{% endfor %}
+
+							</tbody>						
+						</table>
+					</div>
+				  </div>
+				</div>
+			  </div>		  
+		  </div>
+
+		</section>
+		<!-- /.content -->
+	  </div>
+  </div>
+  <!-- /.content-wrapper -->
+ 
+   {% endblock %}

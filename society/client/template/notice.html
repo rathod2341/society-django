@@ -1,0 +1,85 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+	  <div class="container-full">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="d-flex align-items-center">
+				<div class="me-auto">
+					<h3 class="page-title">Notices</h3>
+					<div class="d-inline-block align-items-center">
+						<!-- <nav>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+								<li class="breadcrumb-item" aria-current="page">Component</li>
+								<li class="breadcrumb-item active" aria-current="page">Advanced Medias</li>
+							</ol>
+						</nav> -->
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+							
+
+				{% for data in n %}
+				<div class="col-md-12 col-12">
+					
+					<div class="media bg-white mb-20">
+						
+					   <div class="media-body">
+						
+
+						<p><h3>{{data.title}}</h3></p><hr>
+						<br/>
+						<p>{{data.description}}</p>
+						<br/>
+						<p><b>{{data.notice_date}}</b></p>
+						
+						<!-- <div class="d-inline-block pull-right mt-10">
+						  <button type="button" class="btn btn-rounded btn-sm btn-success m-5">Approve</button>
+						  <button type="button" class="btn btn-rounded btn-sm btn-danger m-5">Delete</button>
+						</div> -->
+					  </div>
+					  
+					</div>
+					
+				</div>		
+				{% endfor %}
+					
+
+							
+
+						
+
+						
+
+				
+				
+
+				
+				
+
+				
+				
+
+				
+
+				
+				
+			</div>
+		</section>
+		<!-- /.content -->
+	  </div>
+  </div>
+  <!-- /.content-wrapper -->
+ 
+ {% endblock %} 

@@ -1,0 +1,99 @@
+﻿{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+	  <div class="container-full">
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-xl-3 col-lg-6 col-12">
+					<div class="box">
+						<div class="box-body">
+							<div class="d-flex justify-content-between">
+								<h2 class="my-0 fw-600 text-primary">{{complain}}</h2>
+								<div class="w-40 h-40 bg-primary rounded-circle text-center fs-24 l-h-40"><i class="fa fa-inbox"></i></div>
+							</div>
+							<p class="fs-18 mt-10">Total Complaint</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6 col-12">
+					<div class="box">
+						<div class="box-body">
+							<div class="d-flex justify-content-between">
+								<h2 class="my-0 fw-600 text-warning">{{member}}</h2>
+								<div class="w-40 h-40 bg-warning rounded-circle text-center fs-24 l-h-40"><i class="fa fa-shopping-bag"></i></div>
+							</div>
+							<p class="fs-18 mt-10">Housing Members</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6 col-12">
+					<div class="box">
+						<div class="box-body">
+							<div class="d-flex justify-content-between">
+								<h2 class="my-0 fw-600 text-info">{{house_worker}}</h2>
+								<div class="w-40 h-40 bg-info rounded-circle text-center fs-24 l-h-40"><i class="fa fa-dollar"></i></div>
+							</div>
+							<p class="fs-18 mt-10">House Workers</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6 col-12">
+					<div class="box">
+						<div class="box-body">
+							<div class="d-flex justify-content-between">
+								<h2 class="my-0 fw-600 text-danger">{{family}}</h2>
+								<div class="w-40 h-40 bg-danger rounded-circle text-center fs-24 l-h-40"><i class="fa fa-dropbox"></i></div>
+							</div>
+							<p class="fs-18 mt-10">My Family Members</p>
+						</div>
+					</div>
+				</div>				
+							
+			
+				
+				<div class="col-xl-12 col-12">
+					<div class="box">
+						<div class="box-header with-border">
+						  <h4 class="box-title">My complaints</h4>
+						</div>
+						<div class="box-body pt-0">
+							<div class="table-responsive">
+							  <table class="table mb-0">
+								<thead>
+									<tr>
+										<th>COMPLAINT_TITLE</th>
+										<th>DESCRIPTION</th>
+										<th>STATUS</th>
+									</tr>
+								</thead>
+
+								{% for data in my %}
+								<tr>
+								<td>{{data.complaint_title}}</td>
+								<td>{{data.descritpion}}</td>
+								<td>
+									{% if data.status == "Pending" %}
+									    <span class="badge badge-pill badge-danger">{{data.status}}</span></td>
+								    {% else %}
+										<span class="badge badge-pill badge-success">{{data.status}}</span></td>
+									{% endif %}
+								</tr>
+
+								{% endfor %}
+							  </table>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		<!-- /.content -->
+	  </div>
+  </div>
+{% endblock %}

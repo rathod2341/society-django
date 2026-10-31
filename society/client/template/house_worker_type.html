@@ -1,0 +1,73 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+	  <div class="container-full">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="d-flex align-items-center">
+				<div class="me-auto">
+					<h3 class="page-title">House Worker Type</h3>
+					<div class="d-inline-block align-items-center">
+						<nav>
+							
+						</nav>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<!-- Main content -->
+		<section class="content">
+
+		  <div class="row">
+			  <div class="col-12 col-lg-12">
+				<div class="box">
+				  <div class="box-header bg-primary">
+					<h4 class="box-title">Workers</h4>
+				  </div>
+
+				  <div class="box-body">
+					<div class="table-responsive">
+						<table class="table product-overview">
+							<thead>
+								<tr>
+									<th>Worker Type</th>
+									<th>DESCRIPTION</th>
+								</tr>
+							</thead>
+							<tbody>
+								
+								
+								
+								
+								{% for data in hwt %}
+								<tr>
+									<td><a href="/house_worker/{{data.type_name}}">{{data.type_name}}</a></td>
+                                    <td>{{data.descripition}}</td>
+								</tr>
+                                {% endfor %}							
+							</tbody>
+						</table>
+						
+					</div>
+
+				  </div>
+				</div>
+			  </div>
+
+			 
+
+		  </div>
+
+		</section>
+		<!-- /.content -->
+	  </div>
+  </div>
+  <!-- /.content-wrapper -->
+ 
+   {% endblock %}

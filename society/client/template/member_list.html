@@ -1,0 +1,100 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+	  <div class="container-full">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="d-flex align-items-center">
+				<div class="me-auto">
+					<h3 class="page-title">Housing Members</h3>
+					<div class="d-inline-block align-items-center">
+						<!-- <nav>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+								<li class="breadcrumb-item" aria-current="page">widgets</li>
+								<li class="breadcrumb-item active" aria-current="page">Blog widgets</li>
+							</ol>
+						</nav> -->
+					</div>
+				</div>				
+			</div>
+		</div>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-12">
+					<div class="box">
+						<div class="box-header no-border">
+							<h4 class="box-title">Resident Details</h4>
+						</div>
+					</div>
+				</div>				
+				<div class="col-12">
+					<div class="news-slider owl-carousel">
+
+    {% for data in ml %}
+
+        <div class="box">
+
+            {% if data.profile_photo %}
+
+                <img class="card-img-top img-responsive"
+                     style="height: 300px;"
+                     src="{{ data.profile_photo.url }}"
+                     alt="Profile photo">
+
+            {% else %}
+
+                <img class="card-img-top img-responsive"
+                     style="height: 300px;"
+                     src="/static/images/default-profile.png"
+                     alt="Default profile photo">
+
+            {% endif %}
+
+            <div class="box-body">
+                <div class="text-center">
+
+                    <h4 class="box-title">
+                        Member name: {{ data.member_name }}
+                    </h4>
+
+                    <p class="box-text">
+                        Contact: {{ data.contact }}<br>
+                        Email: {{ data.email }}<br>
+
+                        {% if data.is_rented %}
+                            Rented
+                        {% else %}
+                            Owner
+                        {% endif %}
+
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>            <div class="chat-input">      
+                <form>
+                    <input type="text" id="chat-input" placeholder="Send a message..."/>
+                    <button type="submit" class="chat-submit" id="chat-submit">
+                        <span class="icon-Send fs-22"></span>
+                    </button>
+                </form>      
+            </div>
+		</div>
+	</div>
+	
+	<!-- Page Content overlay -->
+	
+	
+{% endblock %}
