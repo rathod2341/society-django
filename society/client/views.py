@@ -13,7 +13,6 @@ def login(request):
     if request.method == "POST":
         name = request.POST['email']
         pwd = request.POST['password']
-        print(name , "-------",pwd)
 
         c = housingmember.objects.filter(email=name , password=pwd).count()
         if c == 1:
