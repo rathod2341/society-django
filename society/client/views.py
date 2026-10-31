@@ -1,3 +1,5 @@
+from django.contrib.auth.hashers import make_password, check_password
+
 from django.shortcuts import render , redirect
 
 from django.contrib import messages
@@ -14,17 +16,16 @@ def login(request):
         name = request.POST['email']
         pwd = request.POST['password']
 
-        c = housingmember.objects.filter(email=name , password=pwd).count()
-        if c == 1:
-            obj = housingmember.objects.get(email=name , password=pwd)
-            request.session['user_id']=obj.member_id
+        obj = housingmember.objects.filter(email=name).first()
+        if obj and check_password(pwd, obj.password):
+            request.session['user_id'] = obj.member_id
             return redirect("/index/")
         else:
-            messages.error(request,"Invalid username or password")
-            return render(request,"login.html")
-   
+            messages.error(request, "Invalid username or password")
+            return render(request, "login.html")
+
     else:
-        return render(request,"login.html")
+        return render(request, "login.html")
 
 def register(request):
     if request.method == "POST":
@@ -40,7 +41,7 @@ def register(request):
             member_name = n ,
             contact = c ,
             email = em , 
-            password = pwd ,
+            password = make_password(pwd)  ,
             otp = 0 ,
             otp_used = 0,
             is_rented = ir,
@@ -129,7 +130,9 @@ def profile(request):
         h.member_name = request.POST.get("name")
         h.contact = request.POST.get("contact")
         h.email = request.POST.get("email")
-        h.password = request.POST.get("password")
+        new_pwd = request.POST.get("password")
+        if new_pwd and new_pwd != h.password:
+            h.password = make_password(new_pwd)
         h.is_rented = request.POST.get("inputis_rented") == "on"    
         
         h.save()
@@ -267,7 +270,7 @@ def set_password(request):
             val = housingmember.objects.filter(email=e,otp = T_otp,otp_used = 0).count()
 
             if val == 1:
-                housingmember.objects.filter(email = e).update(otp_used = 1,password = T_pass)
+                housingmember.objects.filter(email = e).update(otp_used = 1,password = make_password(T_pass))
                 return redirect("/login")
             else:
                 messages.error(request,"Invalid OTP")
