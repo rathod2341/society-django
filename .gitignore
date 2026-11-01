@@ -7,3 +7,4 @@ env/
 staticfiles/
 db.sqlite3
 society/societywish/
+prod.ps1
