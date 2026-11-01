@@ -13,10 +13,10 @@ from client.models import clubhouse_booking , maintanance_payment
 
 def login(request):
     if request.method == "POST":
-        name = request.POST['email']
-        pwd = request.POST['password']
+        name = request.POST.get('email', '').strip()
+        pwd = request.POST.get('password', '')
 
-        obj = housingmember.objects.filter(email=name).first()
+        obj = housingmember.objects.filter(email__iexact=name).first()
         if obj and check_password(pwd, obj.password):
             request.session['user_id'] = obj.member_id
             return redirect("/index/")
@@ -29,33 +29,32 @@ def login(request):
 
 def register(request):
     if request.method == "POST":
-        n = request.POST.get ('member_name')
-        c = request.POST.get ('contact')
-        em= request.POST.get ('email')
-        pwd = request.POST.get ('password')
-        ir = request.POST.get ('is_rented')
-        pf = request.POST.get ('profile_photo')
+        n = request.POST.get('member_name')
+        c = request.POST.get('contact')
+        em = request.POST.get('email', '').strip().lower()
+        pwd = request.POST.get('password')
+        ir = request.POST.get('is_rented')
+        pf = request.POST.get('profile_photo')
 
+        if housingmember.objects.filter(email__iexact=em).exists():
+            messages.error(request, "This email is already registered. Please log in.")
+            return render(request, "register.html")
 
         housingmember.objects.create(
-            member_name = n ,
-            contact = c ,
-            email = em , 
-            password = make_password(pwd)  ,
-            otp = 0 ,
-            otp_used = 0,
-            is_rented = ir,
-            is_admin = 0,
-            profile_photo = pf
+            member_name=n,
+            contact=c,
+            email=em,
+            password=make_password(pwd),
+            otp=0,
+            otp_used=0,
+            is_rented=ir,
+            is_admin=0,
+            profile_photo=pf
+        )
 
-
-
-
-            )
-        
         return redirect("/login/")
     else:
-     return render(request,"register.html")
+        return render(request, "register.html")
     
 def table(request):
     if 'user_id' not in request.session:
